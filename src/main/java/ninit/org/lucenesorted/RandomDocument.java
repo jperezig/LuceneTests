@@ -2,6 +2,9 @@ package ninit.org.lucenesorted;
 
 public class RandomDocument {
 
+    public static String ID = "ID";
+    public static String SCORE = "SCORE";
+
     private int id;
     private float score;
 
