@@ -30,7 +30,7 @@ public class RandomDocumentIndexer {
 
     public void createIndex(String indexFile, String fieldName, Analyzer analyzer, boolean reverse) throws IOException {
         this.directory = FSDirectory.open(new File(indexFile));
-        IndexWriterConfig indexWriterConfiguration = new IndexWriterConfig(Version.LUCENE_4_9, this.analyzer);
+        IndexWriterConfig indexWriterConfiguration = new IndexWriterConfig(Version.LUCENE_4_10_0, this.analyzer);
         indexWriterConfiguration.setRAMBufferSizeMB(48);
 
         Sort sort = new Sort(new SortField(fieldName, SortField.Type.FLOAT, reverse));
@@ -43,7 +43,7 @@ public class RandomDocumentIndexer {
 
     public void createIndex(String indexFile, Analyzer analyzer) throws IOException {
         this.directory = FSDirectory.open(new File(indexFile));
-        IndexWriterConfig indexWriterConfiguration = new IndexWriterConfig(Version.LUCENE_4_9, this.analyzer);
+        IndexWriterConfig indexWriterConfiguration = new IndexWriterConfig(Version.LUCENE_4_10_0, this.analyzer);
         indexWriterConfiguration.setRAMBufferSizeMB(48);
 
         indexWriter = new IndexWriter(directory, indexWriterConfiguration);

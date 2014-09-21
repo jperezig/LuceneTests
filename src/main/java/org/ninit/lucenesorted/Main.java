@@ -5,7 +5,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,27 +19,21 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         RandomDocumentIndexer indexer = new RandomDocumentIndexer();
-        indexer.createIndex(args[0], RandomDocument.SCORE,
-                new StandardAnalyzer(Version.LUCENE_4_9), true);
+        indexer.createIndex(args[0], RandomDocument.SCORE, new StandardAnalyzer(), true);
 
         RandomDocumentIterator iterator = new RandomDocumentIterator(10000000);
         int i = 1;
         Stopwatch watch = Stopwatch.createStarted();
-        ThreadPoolExecutor threadPool =
-                (ThreadPoolExecutor) Executors.newFixedThreadPool(NUM_THREADS);
+        ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(NUM_THREADS);
 
         while (iterator.hasNext()) {
             while (threadPool.getQueue().size() > MAX_QUEUE_SIZE) {
                 try {
-                    logger.info(
-                            "Thread sleeping for {} ms. Actives Threads {}, Task Queue size {}",
-                            WAIT_TIME, threadPool.getActiveCount(), threadPool
-                                    .getQueue().size());
+                    logger.info("Thread sleeping for {} ms. Actives Threads {}, Task Queue size {}", WAIT_TIME,
+                            threadPool.getActiveCount(), threadPool.getQueue().size());
                     Thread.sleep(WAIT_TIME);
-                    logger.info(
-                            "Thread awake. Actives Threads {}, Task Queue size {}",
-                            threadPool.getActiveCount(), threadPool.getQueue()
-                                    .size());
+                    logger.info("Thread awake. Actives Threads {}, Task Queue size {}", threadPool.getActiveCount(),
+                            threadPool.getQueue().size());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
