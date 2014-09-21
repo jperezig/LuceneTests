@@ -1,4 +1,4 @@
-package ninit.org.lucenesorted;
+package org.ninit.lucenesorted;
 
 public class RandomDocument {
 

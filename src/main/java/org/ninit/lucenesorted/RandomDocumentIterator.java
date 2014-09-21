@@ -1,4 +1,4 @@
-package ninit.org.lucenesorted;
+package org.ninit.lucenesorted;
 
 import java.util.Iterator;
 import java.util.Random;
